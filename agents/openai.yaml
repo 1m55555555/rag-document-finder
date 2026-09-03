@@ -1,0 +1,7 @@
+interface:
+  display_name: "RAG 文档测试集发现器"
+  short_description: "搜索并验证适合多模态 RAG 测试的公开文档版式"
+  default_prompt: "Use $rag-document-finder to find verified public PDFs matching my RAG test document requirements."
+
+policy:
+  allow_implicit_invocation: true
