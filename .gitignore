@@ -1,0 +1,13 @@
+# Python bytecode and local caches
+__pycache__/
+*.py[cod]
+
+# Generated inspection artifacts and downloaded source documents
+*-report.json
+*.pdf
+
+# Local editor and operating-system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
