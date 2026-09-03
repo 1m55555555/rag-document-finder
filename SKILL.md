@@ -39,16 +39,38 @@ procedure manual unless the PDF inspection supports that classification.
 ## Verify the actual PDF
 
 For each serious candidate, download it only after the user has allowed network
-access or asked for the document. Run:
+access or asked for the document. Run the UTF-8 checker (the original
+`inspect_pdf.py` remains as a legacy entry point):
 
 ```powershell
-python scripts/inspect_pdf.py <pdf-path>
+python scripts/inspect_pdf_v2.py <pdf-path> --output <report.json> `
+  --render-dir <rendered-pages> --render-samples 3
 ```
 
 The report measures page count, extracted-text density, raster images, vector
 drawings, image coverage, numbered-step cues, captions, and probable table
 pages. Read [references/scoring-rubric.md](references/scoring-rubric.md) when
 ranking candidates.
+
+Open the selected PNGs and visually confirm the claimed screenshots, diagrams,
+tables, or sparse-text pages. Rendering is a spot-check, not automatic proof.
+The selector prefers sparse visual pages, image-heavy pages, table-like pages,
+and procedure pages, in that order.
+
+Record the verified result in a UTF-8 candidate manifest:
+
+```powershell
+python scripts/record_candidate.py <pdf-path> `
+  --manifest <candidate_manifest.json> `
+  --source-url <direct-pdf-url> `
+  --inspection-report <report.json> `
+  --title "..." --publisher "..." --language zh `
+  --score 86 --status verified
+```
+
+`candidate_manifest.json` records the source URL, local file hash, inspection
+summary, rendered samples, score, status, rejection reasons, and notes. It is
+an audit record only; it does not upload or ingest documents.
 
 Do not claim a document is image-only solely because `get_images()` returns
 images. Vector artwork and scanned full-page renders require interpreting the

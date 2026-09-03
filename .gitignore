@@ -5,6 +5,8 @@ __pycache__/
 # Generated inspection artifacts and downloaded source documents
 *-report.json
 *.pdf
+*.png
+renders/
 
 # Local editor and operating-system files
 .vscode/
